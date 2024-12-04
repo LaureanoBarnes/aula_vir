@@ -1,0 +1,382 @@
+:root {
+    --color-primary: #ffeb3b;
+    --color-gray-light: #f9fafb;
+    --color-gray-dark: #111827;
+    --color-gray-border: rgba(0, 0, 0, 0.1);
+    --color-sidebar-dark: rgba(0, 0, 0, 0.7);
+    --color-header-dark: rgba(30, 30, 30, 0.7);
+    --color-card-dark: rgba(0, 0, 0, 0.6);
+    --color-text-yellow: #ffeb3b;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Fondo de la página con imagen y transparencia */
+body {
+    font-family: Arial, sans-serif;
+    background: url('https://www.getwallpapers.com/wallpaper/full/a/5/d/544750.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--color-gray-dark);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+/* Header transparente con sombra */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid var(--color-gray-border);
+    z-index: 50;
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .drop-zone{
+    border: 2px solid;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.icon-home {
+    width: 24px;
+    height: 24px;
+    color: var(--color-primary);
+}
+
+.header h1,
+.header h2 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    padding-top: 22%;
+}
+
+.student-name {
+    font-size: 0.875rem;
+    color: var(--color-gray-border);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Sidebar transparente */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    bottom: 0;
+    width: 256px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--color-primary);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .sidebar {
+    background-color: var(--color-sidebar-dark);
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-item i {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+}
+
+/* Modo oscuro en las cartas */
+.main-content {
+    margin-left: 256px;
+    margin-top: 64px;
+    padding: 2rem;
+    transition: background-color 0.3s;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: -24px;
+}
+
+[data-theme="dark"] .card {
+    background-color: var(--color-card-dark);
+    color: var(--color-text-yellow);
+}
+
+/* User menu y theme toggle */
+.user-menu-btn,
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 240px;
+    background-color: var(--color-gray-light);
+    border: 1px solid var(--color-gray-border);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    transition: all 0.2s ease;
+}
+
+.user-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-info {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-gray-border);
+}
+
+.user-name {
+    font-weight: 500;
+color: black;
+}
+
+.user-email {
+    font-size: 0.875rem;
+    color: black;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--color-gray-dark);
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    background: none;
+    width: 100%;
+}
+
+
+
+/* Modo oscuro para el user-dropdown */
+[data-theme="dark"] .user-dropdown {
+    background-color: var(--color-gray-dark);
+    border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: #ffeb3b;
+}
+.dropdown-item:hover{
+    background: gray;
+}
+.dropdown-item text-red{
+    background-color: red;
+}
+[data-theme="dark"] .btn-primary{
+    background-color: #ffeb3b;
+    color:black;
+}
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Formulario de actividad */
+.activity-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-gray-dark);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.3);
+}
+
+/* Modo oscuro para formulario */
+[data-theme="dark"] label {
+    color: var(--color-text-yellow);
+}
+
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] input[type="time"],
+[data-theme="dark"] textarea {
+    background-color: var(--color-gray-800);
+    color: #ffeb3b;
+    border: 2px solid;
+}
+
+[data-theme="dark"] input[type="text"]:focus,
+[data-theme="dark"] input[type="date"]:focus,
+[data-theme="dark"] input[type="time"]:focus,
+[data-theme="dark"] textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.3);
+}
+
+/* Zona de carga de archivos */
+.drop-zone {
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    /*padding: 2rem;*/
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.drop-zone:hover,
+.drop-zone.dragging {
+    border-color: var(--color-primary);
+    background-color: rgba(255, 235, 59, 0.05);
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--color-gray-400);
+    margin-bottom: 1rem;
+}
+
+.drop-zone-text {
+    margin-bottom: 0.5rem;
+    color: var(--color-gray-600);
+}
+
+.drop-zone-hint {
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+}
+
+/* Botones */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-gray-border);
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: black;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: green;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--color-gray-dark);
+    border: 1px solid var(--color-gray-300);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-gray-100);
+}
+
+[data-theme="dark"] .btn-secondary {
+    background-color: var(--color-gray-800);
+    color: var(--color-gray-light);
+    border: 1px solid var(--color-gray-700);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background-color: var(--color-gray-700);
+}
+[data-theme="dark"] .user-name{
+    color: #ffeb3b;
+}
+[data-theme="dark"] .user-email{
+    color: #ffeb3b;
+}

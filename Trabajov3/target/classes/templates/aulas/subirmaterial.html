@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${aula.nombreAula}">Aula Virtual</title>
+    <link rel="stylesheet" href="/Estilos/Stylesubirmaterial.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div class="container">
+    <aside class="top-aside">
+        <a href="/" class="logo">
+            <i data-lucide="school"></i>
+            <h1 th:text="${aula.nombreAula}">Nombre del Aula</h1>
+        </a>
+        <div class="user-info">
+            <span th:text="${nombreCompleto}">Nombre del Alumno</span>
+            <div class="profile-menu">
+                <i data-lucide="user" id="profile-icon"></i>
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <a sec:href="@{/perfil}" class="dropdown-item">
+                        <i data-lucide="user"></i>
+                        Perfil
+                    </a>
+                    <a href="/logout" onclick="this.parentNode.submit();" class="dropdown-item">
+                        <i data-lucide="log-out"></i>
+                        Desconectarse
+                    </a>
+                </div>
+            </div>
+            <button id="dark-mode-toggle" class="icon-button">
+                <i data-lucide="moon"></i>
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <aside class="left-aside">
+            <nav>
+                <ul>
+                    <li><a th:href="@{/aula/{id}(id=${aula.id_aula})}"><i data-lucide="home"></i> Inicio</a></li>
+                    <li>
+                        <a href="/" th:href="@{/}" class="menu-item">
+                            <i data-lucide="list"></i>
+                            <span>Listado de Aulas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/" th:href="@{/aula/{id}/foro(id=${aula.id_aula})}" class="menu-item">
+                            <i data-lucide="message-square"></i>
+                            <span>Foro</span>
+                        </a>
+                    </li>
+                    <li><a href="/"><i data-lucide="activity"></i> Actividades</a></li>
+                    <li><a href="/" th:href="@{/aula/{id}/participantes(id=${aula.id_aula})}" class="menu-item"
+                           data-page="participants"><i data-lucide="users"></i> <span> participantes</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            <div id="materials-page" class="page">
+                <div class="card">
+                    <h2>Subir Material</h2>
+                    <form id="upload-form" class="upload-form" th:action="@{/api/archivo}" method="post"
+                          enctype="multipart/form-data">
+                        <div class="file-input-wrapper">
+                            <label for="file-upload" class="file-input-label">
+                                <i data-lucide="upload"></i>
+                                <span>Seleccionar archivo</span>
+                            </label>
+                            <input id="file-upload" name="file" type="file" accept=".pdf" required>
+                            <span id="file-name">Ningún archivo seleccionado</span>
+                        </div>
+                        <input type="hidden" name="categoria" th:value="${aula.nombreAula}">
+                        <input type="hidden" name="aulaId" th:value="${aula.id_aula}">
+                        <button type="submit">Subir PDF</button>
+                    </form>
+                    <div id="upload-message" class="message" th:if="${mensaje != null}"
+                         th:classappend="${tipoMensaje == 'exito' ? 'success' : 'error'}"
+                         th:text="${mensaje}"></div>
+
+                    <h2>Archivos en <span th:text="${aula.nombreAula}">Nombre del Aula</span></h2>
+                    <ul id="material-list" class="material-list">
+                        <li th:if="${archivos.size() == 0}">
+                            <p>No hay archivos subidos en esta aula.</p>
+                        </li>
+                        <li th:each="archivo : ${archivos}" class="material-item">
+                            <a th:href="@{${archivo.nombre}}" th:text="${archivo.nombre}" target="_blank">Nombre del
+                                archivo</a>
+                            <div class="material-options" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <button class="options-btn" th:attr="data-id=${archivo.id}">
+                                    <i data-lucide="settings"></i>
+                                </button>
+                                <div class="options-dropdown" th:id="'dropdown-' + ${archivo.id}">
+                                    <button class="edit-btn" th:attr="data-id=${archivo.id}"
+                                            th:onclick="'mostrarFormularioEditar(' + ${archivo.id} + ')'">
+                                        <i data-lucide="edit-2"></i> Editar
+                                    </button>
+                                    <form th:action="@{/archivo/eliminar/{archivoId}/{id_aula}(archivoId=${archivo.id}, id_aula=${aula.id_aula})}"
+                                          method="post"
+                                          onsubmit="return confirm('¿Seguro que deseas eliminar este archivo?');">
+                                        <button type="submit">
+                                            <i data-lucide="trash-2"></i> Eliminar
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <form th:id="'form-editar-' + ${archivo.id}"
+                                  th:action="@{/archivo/editar/{archivoId}/{id_aula}(archivoId=${archivo.id}, id_aula=${aula.id_aula})}"
+                                  method="post" enctype="multipart/form-data" style="display:none;">
+                                <input type="file" th:id="'file-' + ${archivo.id}" name="file" accept=".pdf" required/>
+                                <button type="submit">Actualizar</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="/Estilos/javascript/scriptSubirMaterial.js"></script>
+</body>
+</html>

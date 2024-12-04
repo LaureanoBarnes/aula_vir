@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Crear Aula</title>
+    <link rel="stylesheet" href="/Estilos/styleCrearAula.css">
+</head>
+<body>
+<header>
+    <button>
+        <a href="/" title="home">
+            <img src="https://www.svgrepo.com/show/404089/school.svg" class="home-img">
+        </a>
+    </button>
+
+    <div class="dropdown">
+        <span th:text="${nombreCompleto}"></span>
+        <button>
+            <img src="https://www.svgrepo.com/show/512697/profile-1341.svg" class="profile-img">
+        </button>
+        <div class="dropdown-content">
+            <a sec:href="@{/perfil}">Perfil</a>
+            <a href="logout" onclick="this.parentNode.submit();">desconectarse</a>
+        </div>
+    </div>
+</header>
+<div class="form-container">
+    <h1 th:text="${aula.id_aula} == null ? 'Crear Aula' : 'Editar Aula'"></h1>
+    <form th:action="@{/guardar}" th:object="${aula}" method="post">
+        <input type="hidden" th:field="*{id_aula}"/>
+        <label for="nombreAula">Nombre del Aula:</label>
+        <input type="text" id="nombreAula" th:field="*{nombreAula}" required>
+        <br>
+        <label for="cursoAula">Curso del Aula:</label>
+        <input type="text" id="cursoAula" th:field="*{cursoAula}" required>
+        <br>
+        <button type="submit" th:text="${aula.id_aula} == null ? 'Guardar' : 'Actualizar'"></button>
+        <a href="/">
+            <button type="button">Cancelar</button>
+        </a>
+    </form>
+</div>
+</body>
+</html>

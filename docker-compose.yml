@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app_horizonte:
+    build: Trabajov3
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://trabajov3:3306/Trabajov3?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: Joaquin234
+      DB_PLATFORM: org.hibernate.dialect.MySQL8Dialect
+    restart: always
+    depends_on:
+      trabajov3:
+        condition: service_healthy
+
+  trabajov3:
+    image: mysql:8.0.33
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Joaquin234
+      MYSQL_PASSWORD: Joaquin234
+      MYSQL_DATABASE: Trabajov3
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/Estilos/styleRegistro.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Registro</h1>
+                <hr/>
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <form class="form-horizontal" th:action="@{/salvar}" th:object="${individuo}" method="post">
+                <div th:object="${usuario}">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="nomusuario" class="control-label">Usuario</label>
+                            <div>
+                                <input type="text" class="form-control" id="nomusuario" th:field="*{nomusuario}"
+                                       placeholder="Ingrese su Usuario" required/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="contrasena" class="control-label">Contraseña</label>
+                            <div>
+                                <input type="password" class="form-control" id="contrasena" th:field="*{contrasena}"
+                                       placeholder="Ingrese su Contraseña" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="rol" class="cols-sm-2 control-label">Rol</label>
+                        <div class="cols-sm-10">
+                            <select class="form-control" id="rol" name="rol" required>
+                                <option value="" disabled selected>Seleccione un rol</option>
+                                <option th:each="rol : ${roles}" th:value="${rol}" th:text="${rol}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="correo" class="cols-sm-2 control-label">Correo</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="email" class="form-control" id="correo" th:field="*{correo}"
+                                   placeholder="Ingrese su Correo" pattern=".+@.+\..+" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="nombre" class="control-label">Nombre</label>
+                        <div>
+                            <input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+                                   placeholder="Ingrese su Nombre" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label for="apellido" class="control-label">Apellido</label>
+                            <div>
+                                <input type="text" class="form-control" id="apellido" th:field="*{apellido}"
+                                       placeholder="Ingrese su Apellido" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="edad" class="control-label">Edad</label>
+                        <div>
+                            <input type="number" class="form-control" id="edad" th:field="*{edad}"
+                                   placeholder="Ingrese su Edad" required/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="telefono" class="control-label">Teléfono</label>
+                        <div>
+                            <input type="tel" class="form-control" id="telefono" th:field="*{telefono}"
+                                   placeholder="Ingrese su Teléfono"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Registrar</button>
+                </div>
+                <div class="login-register">
+                    <a href="ingreso">Iniciar sesión</a>
+                    <!--                    <a href="/">Volver inicio</a>-->
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

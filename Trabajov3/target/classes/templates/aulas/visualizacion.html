@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Virtual</title>
+    <link rel="stylesheet" href="/Estilos/stylePrincipalAula.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div class="container">
+    <aside class="top-aside">
+        <a href="/" class="logo">
+            <img src="https://www.svgrepo.com/show/404089/school.svg" alt="School" class="school-icon">
+            <h1 th:text="${aula.nombreAula}">Nombre del Aula</h1>
+        </a>
+        <div class="user-info">
+            <span th:text="${nombreCompleto}">nombre del alumno</span>
+            <div class="profile-menu">
+                <button class="icon-button profile-button">
+                    <i data-lucide="user" id="profile-icon"></i>
+                </button>
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <a sec:href="@{/perfil}" class="dropdown-item">
+                        <i data-lucide="user"></i>
+                        Perfil
+                    </a>
+                    <a href="/logout" onclick="this.parentNode.submit();" class="dropdown-item">
+                        <i data-lucide="log-out"></i>
+                        Desconectarse
+                    </a>
+                </div>
+            </div>
+            <button class="dark-mode-toggle" id="dark-mode-toggle">
+                <i data-lucide="moon"></i>
+            </button>
+            <button class="menu-toggle" id="menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <aside class="left-aside" id="left-aside">
+            <nav>
+                <ul>
+                    <li>
+                        <a th:href="@{/}" class="menu-item">
+                            <i data-lucide="list"></i>
+                            <span>Listado de Aulas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/aula/{id}/subirmaterial(id=${aula.id_aula})}" class="menu-item">
+                            <i data-lucide="upload"></i>
+                            <span>Subir Material</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/aula/{id}/actividades(id=${aula.id_aula})}" class="menu-item">
+                            <i data-lucide="activity"></i>
+                            <span>Actividades</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/aula/{id}/foro(id=${aula.id_aula})}" class="menu-item">
+                            <i data-lucide="message-square"></i>
+                            <span>Foro</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/aula/{id}/participantes(id=${aula.id_aula})}" class="menu-item">
+                            <i data-lucide="users"></i>
+                            <span>Participantes</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </aside>
+
+        <main>
+            <div class="card">
+                <h2>Novedades del Aula</h2>
+                <ul class="news-list">
+                    <li class="news-item">
+                        <h3>Nueva tarea asignada</h3>
+                        <p>Se ha publicado una nueva tarea para la próxima semana.</p>
+                    </li>
+                    <li class="news-item">
+                        <h3>Próximo examen</h3>
+                        <p>Recuerda que el examen de mitad de curso es el próximo viernes.</p>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="/Estilos/javascript/scriptprincipal.js"></script>
+</body>
+</html>
